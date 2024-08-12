@@ -33,6 +33,8 @@ Welcome to the **picoFunctionGenerator**! This repository contains the code for 
 
 3. **Select the Raspberry Pi Pico Board:**
    - Go to `Tools > Board > Raspberry Pi RP2040 Boards` and select `Raspberry Pi Pico`.
+   - If you do not have this board you will need to install additional board libraries from the board URL. Go to `File > Prefrences... > Additional boards manager URLs` and add the following link
+   `https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json`
 
 4. **Upload the Code:**
    - Connect your Raspberry Pi Pico to your computer.
