@@ -42,12 +42,19 @@ Welcome to the **picoFunctionGenerator**! This repository contains the code for 
 
 ### Setting Frequency and Duty Cycle
 
+A simple math to follow
+
+$$\frac{f_{sys}} {f_{desired} \times 2^{bit}} > 1$$
+min resolution 2 bits
+
 Once the code is uploaded, the Pico generates a square wave on the specified pins as defined. For example:
 ```
-PWMController pwm1(14, 10000000.0, 10, 0.0, false, 4); 
-// Pin 14, 1 MHz, 10% duty cycle, no phase delay, non-inverting, 4-bit resolution
-PWMController pwm2(15, 10000000.0, 50, 0.0, true, 4); 
-// Pin 15, 1 MHz, 50% duty cycle, no phase delay, inverting, 4-bit resolution
+// Requirement: clk_feq / (feq * resolution_in_int) > 1, min resolution 2 bits
+// Maximum Working Frequency: 16MHz @ 2-bit resolution
+// They cannot have different frequency and resolution if they are on the same channel
+PWMController pwm1(6, 0.2*1000*1000.0, 45, 0, false, 8); // Pin 6, 200 kHz, 45% duty cycle, no phase delay, 8-bit resolution
+PWMController pwm2(7, 0.2*1000*1000.0, 45, 0, false, 8); // Pin 7, 200 kHz, 45% duty cycle, no phase delay, 8-bit resolution
+
 ```
 The 10% duty cycle not necessarily translates to 10%, but rather an approximation to the nearest bit will be calculated instead.
 

@@ -4,11 +4,16 @@
 // Every even number is a new slice A channel and the next odd number pin is on the same slice's B channel
 // Each slice shares the sameclock divider and the counter, so their phase is completely identical
 // But we can have a different trigger level and if it inverts or not
-PWMController pwm1(14, 10000000.0, 10, 0.0, false, 4); // Pin 15, 1 MHz, 43.75% duty cycle, no phase delay, 4-bit resolution
-PWMController pwm2(15, 10000000.0, 50, 0.0, true, 4); // Pin 16, 1 MHz, 43.75% duty cycle, no phase delay, 4-bit resolution
+// Requirement: clk_feq / (feq * resolution_in_int) > 1, min resolution 2 bits
+// Maximum Working Frequency: 16MHz @ 2-bit resolution
+// They cannot have different frequency and resolution if they are on the same channel
+PWMController pwm1(6, 0.2*1000*1000.0, 45, 0, false, 8); // Pin 6, 200 kHz, 00% duty cycle, no phase delay, 4-bit resolution
+PWMController pwm2(7, 0.2*1000*1000.0, 45, 0, false, 8); // Pin 7, 200 kHz, 50% duty cycle, no phase delay, 4-bit resolution
+PWMController pwm3(15, 0.2*1000*1000.0, 45, 54, false, 8); // Pin 15, 200 kHz, 00% duty cycle, no phase delay, 4-bit resolution
+PWMController pwm4(16, 0.2*1000*1000.0, 45, 54, false, 8); // Pin 16, 200 kHz, 50% duty cycle, no phase delay, 4-bit resolution
 
 void setup() {
-    set_sys_clock_khz(200000, true);  // Overclock to 200 MHz
+    set_sys_clock_khz(256000, true);  // Overclock to 200 MHz
     //Serial.begin(115200);
     //while (!Serial) { delay(10); }  // Wait for Serial Monitor to open
 
