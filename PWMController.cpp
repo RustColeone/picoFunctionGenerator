@@ -54,7 +54,7 @@ void PWMController::initPWM() {
 void PWMController::updatePWM() {
     uint32_t clock_freq = clock_get_hz(clk_sys);  // Get the current system clock frequency
     uint32_t max_count = (1 << resolutionBits) - 1;
-    float divider_ratio = (float)clock_freq / (frequency);
+    float divider_ratio = (float)clock_freq / (frequency * max_count / 2);
 
     pwm_set_clkdiv(slice_num, divider_ratio);  // Set the clock divider for the PWM slice
     pwm_set_wrap(slice_num, max_count);        // Set the counter wrap value (top value)
