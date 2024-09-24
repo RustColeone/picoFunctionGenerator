@@ -7,10 +7,14 @@
 // Requirement: clk_feq / (feq * resolution_in_int) > 1, min resolution 2 bits
 // Maximum Working Frequency: 16MHz @ 2-bit resolution
 // They cannot have different frequency and resolution if they are on the same channel
-PWMController pwm1(6, 0.2*1000*1000.0, 45, 0, false, 8); // Pin 6, 200 kHz, 00% duty cycle, no phase delay, 4-bit resolution
-PWMController pwm2(7, 0.2*1000*1000.0, 45, 0, false, 8); // Pin 7, 200 kHz, 50% duty cycle, no phase delay, 4-bit resolution
-PWMController pwm3(15, 0.2*1000*1000.0, 45, 54, false, 8); // Pin 15, 200 kHz, 00% duty cycle, no phase delay, 4-bit resolution
-PWMController pwm4(16, 0.2*1000*1000.0, 45, 54, false, 8); // Pin 16, 200 kHz, 50% duty cycle, no phase delay, 4-bit resolution
+PWMController pwm1(6, 0.260*1000*1000.0, 50, 0, false, 8); // Pin 6, 400 kHz, 47% duty cycle, no phase delay, 4-bit resolution
+PWMController pwm2(7, 0.260*1000*1000.0, 50, 0, false, 8); // Pin 7, 400 kHz, 47% duty cycle, no phase delay, 4-bit resolution
+PWMController pwm3(15, 0.260*1000*1000.0, 45, 0, false, 8); // Pin 15, 400 kHz, 47% duty cycle, 58 phase delay, 4-bit resolution
+PWMController pwm4(16, 0.260*1000*1000.0, 45, 0, false, 8); // Pin 16, 400 kHz, 47% duty cycle, 58 phase delay, 4-bit resolution
+//PWMController pwm1(6, 1*1000*1000.0, 42, 0, false, 6);
+//PWMController pwm2(7, 1*1000*1000.0, 42, 0, false, 6);
+//PWMController pwm3(15, 1*1000*1000.0, 42, 70, false, 6);
+//PWMController pwm4(16, 1*1000*1000.0, 42, 70, false, 6);
 
 void setup() {
     set_sys_clock_khz(256000, true);  // Overclock to 200 MHz

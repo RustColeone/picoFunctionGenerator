@@ -83,9 +83,11 @@ void PWMController::updatePWM() {
 }
 
 void PWMController::enableAll() {
+    uint32_t mask = 0;
     for (auto* controller : controllers) {
-        pwm_set_enabled(controller->slice_num, true);  // Enable each PWM slice
+        mask |= (1u << controller->slice_num);  // Build mask of slices to enable
     }
+    pwm_set_mask_enabled(mask);  // Enable all slices simultaneously
 }
 
 void PWMController::disableAll() {
